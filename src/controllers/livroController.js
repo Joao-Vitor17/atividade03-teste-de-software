@@ -1,4 +1,4 @@
-const { criarLivro } = require('../services/livroService');
+const { criarLivro, buscarLivroPorId } = require('../services/livroService');
 
 const criar = async (req, res) => {
     const { titulo, autor } = req.body;
