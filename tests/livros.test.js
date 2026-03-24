@@ -15,6 +15,13 @@ test('GET /livros/:id retorna livro', async () => {
     expect(res.body).toHaveProperty('titulo');
 });
 
+test('GET /livros retorna lista de livros', async () => {
+    const res = await request(api).get('/livros');
+
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+});
+
 test('GET /livros/:id retorna 404', async () => {
     const res = await request(api).get('/livros/9999');
     expect(res.status).toBe(404);

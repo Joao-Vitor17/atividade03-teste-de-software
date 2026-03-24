@@ -1,4 +1,4 @@
-const { criarLivro, buscarLivroPorId } = require('../services/livroService');
+const { criarLivro, buscarLivroPorId, listarLivros } = require('../services/livroService');
 
 const criar = async (req, res) => {
     const { titulo, autor } = req.body;
@@ -22,4 +22,17 @@ const buscarPorId = async (req, res) => {
     }
 }
 
-module.exports = { criar, buscarPorId };
+const listar = async (_req, res) => {
+    try {
+        const livros = await listarLivros();
+        return res.status(200).json(livros);
+    } catch (error) {
+        return res.status(500).json({ erro: 'Erro interno', detalhe: error.message });
+    }
+}
+
+module.exports = {
+    criar,
+    buscarPorId,
+    listar
+};
