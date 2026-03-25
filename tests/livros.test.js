@@ -36,3 +36,14 @@ test('DELETE /livros/:id retorna 404', async () => {
     const res = await request(api).delete('/livros/9999');
     expect(res.status).toBe(404);
 });
+
+test('PUT /livros/:id atualiza livro', async () => {
+    const res = await request(api).put('/livros/1').send({ titulo: 'Clean Code Updated', autor: 'Martin Code' });
+    expect(res.status).toBe(200);
+    expect(res.body.titulo).toBe("Clean Code Updated");
+});
+
+test('PUT /livros/:id retorna 404', async () => {
+    const res = await request(api).put('/livros/9999').send({ titulo: 'Clean Code Updated', autor: 'Martin Code' });
+    expect(res.status).toBe(404);
+}); 
