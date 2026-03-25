@@ -17,8 +17,16 @@ const listarLivros = async () => {
   return await Livro.findAll();
 }
 
+const deletarLivro = async (id) => {
+  const livro = await Livro.findByPk(id);
+  if (!livro) return false;
+  await livro.destroy();
+  return true;
+}
+
 module.exports = {
   criarLivro,
   buscarLivroPorId,
-  listarLivros
+  listarLivros,
+  deletarLivro
 };

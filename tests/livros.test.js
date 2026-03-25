@@ -26,3 +26,13 @@ test('GET /livros/:id retorna 404', async () => {
     const res = await request(api).get('/livros/9999');
     expect(res.status).toBe(404);
 });
+
+test('DELETE /livros/:id deleta livro', async () => {
+    const res = await request(api).delete('/livros/1');
+    expect(res.status).toBe(204);
+});
+
+test('DELETE /livros/:id retorna 404', async () => {
+    const res = await request(api).delete('/livros/9999');
+    expect(res.status).toBe(404);
+});
