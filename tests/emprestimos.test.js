@@ -40,10 +40,10 @@ describe("Empréstimos", () => {
         const res = await axios.get(`${api}/emprestimos/1`);
 
         expect(res.status).toBe(200);
-        expect(res.body).toHaveProperty('id');
-        expect(res.body).toHaveProperty('livro_id');
-        expect(res.body).toHaveProperty('usuario_id');
-        expect(res.body).toHaveProperty('data_devolucao_prevista');
+        expect(res.data).toHaveProperty('id');
+        expect(res.data).toHaveProperty('livro_id');
+        expect(res.data).toHaveProperty('usuario_id');
+        expect(res.data).toHaveProperty('data_devolucao_prevista');
     });
 
     test("deve retornar 404 para empréstimo inexistente", async () => {
