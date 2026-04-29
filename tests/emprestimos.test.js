@@ -139,5 +139,37 @@ describe("Empréstimos", () => {
     });
 
     test("deve retornar 400 ao emprestar livro já emprestado", async () => {
+        const usuario = await axios.post(`${api}/usuarios`, {
+            nome: "Usuário Teste",
+            email: "teste@email.com",
+            senha: "123456",
+            tipo: "admin"
+        });
+
+        const livro = await axios.post(`${api}/livros`, {
+            titulo: "Livro Teste",
+            autor: "Autor Teste"
+        });
+
+        const usuarioId = usuario.data.id;
+        const livroId = livro.data.id;
+
+        await axios.post(`${api}/emprestimos`, {
+            livro_id: livroId,
+            usuario_id: usuarioId,
+            data_devolucao_prevista: "2025-05-01",
+        });
+
+        try {
+            await axios.post(`${api}/emprestimos`, {
+                livro_id: livroId,
+                usuario_id: usuarioId,
+                data_devolucao_prevista: "2025-05-01",
+            });
+
+            fail("Deveria ter retornado erro 400");
+        } catch (err) {
+            expect(err.response.status).toBe(400);
+        }
     });
 });
