@@ -28,7 +28,12 @@ test('GET /livros/:id retorna 404', async () => {
 });
 
 test('DELETE /livros/:id deleta livro', async () => {
-    const res = await request(api).delete('/livros/1');
+    const create = await request(api).post('/livros').send({ titulo: 'Teste', autor: 'Autor' });
+
+    const id = create.body.id;
+
+    const res = await request(api).delete(`/livros/${id}`);
+
     expect(res.status).toBe(204);
 });
 
