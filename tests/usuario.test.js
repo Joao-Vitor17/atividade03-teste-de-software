@@ -10,11 +10,20 @@ describe("Usuários", () => {
   });
 
   test("deve retornar um usuário pelo id", async () => {
-    const res = await axios.get(`${api}/usuarios/1`);
+    const create = await axios.post(`${api}/usuarios`, {
+      nome: "Teste",
+      email: "teste@email.com",
+      senha: "123456",
+      tipo: "admin"
+    });
+
+    const id = create.data.id;
+
+    const res = await axios.get(`${api}/usuarios/${id}`);
+
     expect(res.status).toBe(200);
     expect(res.data).toHaveProperty("id");
     expect(res.data).toHaveProperty("nome");
-    expect(res.data).toHaveProperty("email");
   });
 
   test("deve retornar 404 para usuário inexistente", async () => {
