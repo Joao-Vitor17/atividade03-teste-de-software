@@ -16,7 +16,11 @@ const buscarMultaPorId = async (id) => {
 }
 
 const listarMultas = async () => {
-    return await Multa.findAll();
+    return await Multa.findAll({
+        where: {
+            quitado: false
+        }
+    });
 }
 
 const deletarMulta = async (id) => {
@@ -34,7 +38,8 @@ const atualizarMulta = async (id, dados) => {
 
     for (const campo of camposPermitidos) {
         if (campo in dados) {
-            emprestimo[campo] = dados[campo];
+            // Alterado de "emprestimo" para "multa"
+            multa[campo] = dados[campo]; 
         }
     }
 
